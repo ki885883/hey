@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Happy Birthday MAM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --baby-pink: #f8c8dc;
+            --soft-pink: #f5c6d6;
+            --light-pink: #fce4ec;
+            --medium-pink: #f8b4d0;
+            --dark-pink: #e8a0bf;
+            --text-color: #5d3a4e;
+            --shadow: rgba(93, 58, 78, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-pink);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
+        }
+
+        /* FIX FOR MOBILE VIEWPORT */
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            min-height: 100vh;
+            width: 100%;
+            max-width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            padding: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .screen {
+                padding: 15px;
+                justify-content: flex-start;
+                min-height: 100vh;
+                overflow-y: auto;
+            }
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .screen.exit {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* Opening Screen */
+        #opening-screen.active {
+            background: linear-gradient(135deg, var(--baby-pink) 0%, var(--light-pink) 100%);
+            animation: gradientFlow 10s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .ribbon-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .ribbon-container {
+                height: 200px;
+                margin-top: 20px;
+            }
+        }
+
+        .ribbon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="%23e8a0bf" stroke-width="8"/><path d="M0,55 Q25,35 50,55 T100,55" fill="none" stroke="%23f8b4d0" stroke-width="8"/><path d="M0,45 Q25,25 50,45 T100,45" fill="none" stroke="%23f8c8dc" stroke-width="8"/></svg>');
+            background-repeat: repeat-x;
+            background-size: 100px 100px;
+            background-position: center;
+            cursor: pointer;
+            animation: ribbonFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(232, 160, 191, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .ribbon {
+                background-size: 80px 80px;
+            }
+        }
+
+        @keyframes ribbonFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        .ribbon:hover {
+            animation: ribbonFloat 1s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(232, 160, 191, 0.5));
+        }
+
+        .cut-instruction {
+            margin-top: 250px;
+            text-align: center;
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            animation: bouncePulse 2s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .cut-instruction {
+                margin-top: 180px;
+                font-size: 1rem;
+                padding: 12px 20px;
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @keyframes bouncePulse {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
+        }
+
+        /* Celebration Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: confettiFall 5s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                top: -10px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                transform: translateX(var(--tx, 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Titles */
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--text-color);
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 var(--shadow);
+            text-align: center;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @media (max-width: 768px) {
+            .birthday-title {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+                padding: 0 15px;
+                line-height: 1.2;
+            }
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 3px 3px 0 var(--shadow), 0 0 10px rgba(248, 180, 208, 0.3); }
+            to { text-shadow: 3px 3px 0 var(--shadow), 0 0 20px rgba(248, 180, 208, 0.6); }
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            text-shadow: 2px 2px 0 var(--shadow);
+            margin-top: 20px;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+                padding: 0 15px;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px var(--shadow);
+            z-index: 10;
+            font-weight: 500;
+            transform: translateX(-100px);
+            animation: slideInLeft 0.5s ease-out 0.3s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .back-button:hover {
+            transform: translateX(0) scale(1.05);
+            background: white;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        @keyframes slideInLeft {
+            to { transform: translateX(0); }
+        }
+
+        /* Shayari Container */
+        .shayari-container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin: 0 auto;
+            border: 2px dashed var(--medium-pink);
+            animation: containerFloat 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .shayari-container {
+                padding: 25px;
+                margin: 0 15px;
+                max-width: 95%;
+            }
+        }
+
+        .shayari-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .shayari {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .shayari {
+                font-size: 1.2rem;
+                line-height: 1.5;
+            }
+        }
+
+        .shayari-line {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .shayari-line:nth-child(1) { animation-delay: 0.2s; }
+        .shayari-line:nth-child(2) { animation-delay: 0.4s; }
+        .shayari-line:nth-child(3) { animation-delay: 0.6s; }
+        .shayari-line:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Next Button */
+        .next-section-btn {
+            margin-top: 40px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--medium-pink), var(--dark-pink));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 20px rgba(248, 180, 208, 0.4);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease 1s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .next-section-btn {
+                margin-top: 30px;
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+
+        .next-section-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(248, 180, 208, 0.6);
+            background: linear-gradient(135deg, var(--dark-pink), var(--medium-pink));
+        }
+
+        .next-section-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
+        }
+
+        @keyframes buttonShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .photo-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 10px;
+            }
+        }
+
+        .photo-frame {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px var(--shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 250px;
+            position: relative;
+            border: 3px solid white;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+        }
+
+        @media (max-width: 768px) {
+            .photo-frame {
+                height: 180px;
+                border-radius: 12px;
+            }
+        }
+
+        .photo-frame.loaded {
+            animation: photoPopIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .photo-frame:nth-child(1) { animation-delay: 0.1s; }
+        .photo-frame:nth-child(2) { animation-delay: 0.2s; }
+        .photo-frame:nth-child(3) { animation-delay: 0.3s; }
+        .photo-frame:nth-child(4) { animation-delay: 0.4s; }
+        .photo-frame:nth-child(5) { animation-delay: 0.5s; }
+        .photo-frame:nth-child(6) { animation-delay: 0.6s; }
+        .photo-frame:nth-child(7) { animation-delay: 0.7s; }
+        .photo-frame:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes photoPopIn {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(93, 58, 78, 0.3);
+            z-index: 10;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Music Player */
+        .music-player {
+            max-width: 700px;
+            margin: 40px auto 0;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px var(--shadow);
+            text-align: center;
+            border: 4px solid var(--medium-pink);
+            position: relative;
+            animation: musicSlideUp 0.8s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                padding: 25px;
+                margin: 20px auto 0;
+                max-width: 95%;
+            }
+        }
+
+        @keyframes musicSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .music-player::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            animation: rainbowFlow 3s linear infinite;
+            background-size: 400% 100%;
+        }
+
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .music-title {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            font-weight: 700;
+            font-family: 'Dancing Script', cursive;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @media (max-width: 768px) {
+            .music-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        .song-info {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4285F4;
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        @media (max-width: 768px) {
+            .song-info {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 5px 15px rgba(66, 133, 244, 0.1); }
+            to { box-shadow: 0 5px 25px rgba(66, 133, 244, 0.3); }
+        }
+
+        .song-title {
+            font-size: 1.8rem;
+            color: #4285F4;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .song-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        .song-artist {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .song-artist {
+                font-size: 1rem;
+            }
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .audio-controls {
+                gap: 20px;
+                margin-top: 20px;
+            }
+        }
+
+        .music-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4285F4, var(--medium-pink));
+            color: white;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .music-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(66, 133, 244, 0.4);
+        }
+
+        .music-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .music-btn:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .music-btn.active {
+            animation: buttonPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .volume-control {
+                margin-top: 20px;
+            }
+        }
+
+        .volume-slider {
+            width: 250px;
+            height: 12px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #4285F4, var(--dark-pink));
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .volume-slider {
+                width: 180px;
+            }
+        }
+
+        .volume-slider:hover {
+            box-shadow: 0 0 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: 3px solid #4285F4;
+            box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.5);
+        }
+
+        .music-status {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #4285F4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .music-status {
+                font-size: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        .music-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            height: 20px;
+            display: none;
+        }
+
+        .music-wave.active {
+            display: flex;
+        }
+
+        .music-wave span {
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to top, #4285F4, var(--medium-pink));
+            border-radius: 3px;
+            animation: musicWave 1s ease-in-out infinite;
+        }
+
+        .music-wave span:nth-child(2) { animation-delay: 0.1s; }
+        .music-wave span:nth-child(3) { animation-delay: 0.2s; }
+        .music-wave span:nth-child(4) { animation-delay: 0.3s; }
+        .music-wave span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes musicWave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.8); }
+        }
+
+        .drive-instruction {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            animation: fadeIn 0.5s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .drive-instruction {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--medium-pink), var(--dark-pink));
+            color: white;
+            font-size: 1rem;
+            margin-top: 60px;
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            animation: slideInUp 0.8s ease-out;
+            box-shadow: 0 10px 30px rgba(248, 180, 208, 0.4);
+            position: relative;
+            overflow: hidden;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 20px;
+                margin-top: 40px;
+                font-size: 0.9rem;
+                max-width: 95%;
+            }
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--baby-pink), white, var(--baby-pink));
+            animation: footerGlow 2s linear infinite;
+            background-size: 400% 100%;
+        }
+
+        @keyframes footerGlow {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== LIGHTBOX STYLES ========== */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+            animation: lightboxFadeIn 0.3s ease forwards;
+        }
+
+        @keyframes lightboxFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            animation: lightboxImageZoom 0.4s ease forwards;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-image {
+                max-width: 95%;
+                max-height: 70vh;
+            }
+        }
+
+        @keyframes lightboxImageZoom {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            color: #333;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 10001;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 15px;
+                left: 15px;
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .lightbox-close:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            z-index: 10001;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                bottom: 20px;
+                gap: 20px;
+            }
+        }
+
+        .lightbox-nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 1.4rem;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            margin: 0 20%;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-caption {
+                bottom: 80px;
+                font-size: 1rem;
+                padding: 12px;
+                margin: 0 10%;
+            }
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-counter {
+                top: 20px;
+                right: 20px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(66, 133, 244, 0.3);
+            border-radius: 50%;
+            border-top-color: #4285F4;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ADDED: Scroll container for mobile */
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-container {
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+        }
+
+        /* ADDED: Fix for small screens */
+        @media (max-height: 600px) {
+            .screen {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            
+            .ribbon-container {
+                height: 150px;
+            }
+            
+            .cut-instruction {
+                margin-top: 120px;
+            }
+            
+            .birthday-title {
+                margin-top: 20px;
+            }
+        }
+
+        /* ADDED: Landscape mode fix */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .screen {
+                padding: 10px;
+            }
+            
+            .ribbon-container {
+                height: 120px;
+            }
+            
+            .cut-instruction {
+                margin-top: 100px;
+                font-size: 0.9rem;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+            
+            .photo-frame {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Opening Screen with Ribbon -->
+    <div id="opening-screen" class="screen active">
+        <div class="scroll-container">
+            <div class="ribbon-container">
+                <div class="ribbon" id="ribbon"></div>
+            </div>
+            <div class="cut-instruction">
+                <i class="fas fa-hand-pointer"></i> Click the ribbon to begin the celebration!
+            </div>
+        </div>
+    </div>
+
+    <!-- Title & Shayari Section -->
+    <div id="title-screen" class="screen">
+        <button class="back-button" id="title-back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Ribbon
+        </button>
+        
+        <div class="scroll-container">
+            <h1 class="birthday-title">Happy Birthday MAM</h1>
+            <div class="shayari-container">
+                <div class="shayari">
+                    <div class="shayari-line">जन्मदिन की ढेर सारी शुभकामनाएँ मैम,</div>
+                    <div class="shayari-line">रहिए हमेशा यूँ ही मुस्कुराती हर दिन।</div>
+                    <div class="shayari-line">खुशियों से भरी रहे आपकी ज़िंदगी,</div>
+                    <div class="shayari-line">यही दुआ है दिल से, हर एक पल के लिए।</div>
+                </div>
+            </div>
+            <button class="next-section-btn" id="view-photos-btn">
+                View Memories <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Photo & Music Section -->
+    <div id="photo-music-screen" class="screen">
+        <button class="back-button" id="photo-back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Message
+        </button>
+        
+        <div class="scroll-container">
+            <h2 class="section-title">Precious Moments</h2>
+            
+            <div class="photo-gallery" id="photo-gallery">
+                <!-- Photos will be loaded here -->
+            </div>
+
+            <!-- Music Player -->
+            <div class="music-player">
+                <div class="music-title">Birthday Music</div>
+                
+                <div class="song-info">
+                    <div class="song-title">Main Agar Kahoon</div>
+                    <div class="song-artist">From Om Shanti Om</div>
+                </div>
+                
+                <div class="audio-controls">
+                    <button class="music-btn" id="play-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="music-btn" id="pause-btn">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="music-btn" id="stop-btn">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <button class="music-btn" id="mute-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                
+                <div class="volume-control">
+                    <i class="fas fa-volume-down" style="color: #4285F4;"></i>
+                    <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volume-slider">
+                    <i class="fas fa-volume-up" style="color: #4285F4;"></i>
+                </div>
+                
+                <div class="music-status" id="music-status">
+                    <span id="status-text">Click play to enjoy birthday music!</span>
+                    <div class="music-wave" id="music-wave">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="loading-spinner" id="loading-spinner" style="display: none;"></div>
+                </div>
+                
+                <div class="drive-instruction" id="drive-instruction">
+                    <p><i class="fas fa-music" style="color: #34A853;"></i> <strong>Music Ready!</strong></p>
+                    <p>Your birthday music will play directly in this website</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                Made with <i class="fas fa-heart" style="color: #ffebee;"></i> for a wonderful MAM on her special day!
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Fullscreen Images -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <button class="lightbox-close" id="lightbox-close">
+            <i class="fas fa-times"></i> Close
+        </button>
+        
+        <img class="lightbox-image" id="lightbox-image" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+        
+        <div class="lightbox-nav">
+            <button class="lightbox-nav-btn" id="lightbox-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav-btn" id="lightbox-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="background-music" loop></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Website loaded successfully!");
+            
+            // Get elements
+            const openingScreen = document.getElementById('opening-screen');
+            const titleScreen = document.getElementById('title-screen');
+            const photoMusicScreen = document.getElementById('photo-music-screen');
+            const ribbon = document.getElementById('ribbon');
+            const viewPhotosBtn = document.getElementById('view-photos-btn');
+            const titleBackBtn = document.getElementById('title-back-btn');
+            const photoBackBtn = document.getElementById('photo-back-btn');
+            const photoGallery = document.getElementById('photo-gallery');
+            const backgroundMusic = document.getElementById('background-music');
+            const playBtn = document.getElementById('play-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const muteBtn = document.getElementById('mute-btn');
+            const volumeSlider = document.getElementById('volume-slider');
+            const statusText = document.getElementById('status-text');
+            const musicWave = document.getElementById('music-wave');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            // Lightbox elements
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            
+            // Lightbox state
+            let currentLightboxIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            // Music state
+            let isPlaying = false;
+            let isMuted = false;
+            let lastVolume = 0.5;
+            
+            // Photos data
+            const photos = [
+                {url: 'https://i.ibb.co/DPnWdWxs/Mam3.jpg', label: 'Beautiful Smile'},
+                {url: 'https://i.ibb.co/0VKpHNm4/Mam2.jpg', label: 'Special Moment'},
+                {url: 'https://i.ibb.co/Zz7G6RWR/Image1.jpg', label: 'Cherished Memory'},
+                {url: 'https://i.ibb.co/Gv6bSZHk/mam4.jpg', label: 'Joyful Celebration'},
+                {url: 'https://i.ibb.co/kgspLwN0/mam5.jpg', label: 'Happy Times'},
+                {url: 'https://i.ibb.co/3mSM3TCV/mam6.jpg', label: 'Sweet Memories'},
+                {url: 'https://i.ibb.co/HDxCCC4d/mam7.jpg', label: 'Precious Moments'},
+                {url: 'https://i.ibb.co/N6GwCbph/mam8.jpg', label: 'Forever Blessed'}
+            ];
+            
+            // Function to switch screens with animation
+            function switchScreen(fromScreen, toScreen) {
+                fromScreen.classList.add('exit');
+                
+                setTimeout(() => {
+                    fromScreen.classList.remove('active', 'exit');
+                    toScreen.classList.add('active');
+                    
+                    // Trigger confetti when switching to title screen
+                    if (toScreen.id === 'title-screen') {
+                        createConfetti();
+                    }
+                    
+                    // Load gallery when switching to photo screen
+                    if (toScreen.id === 'photo-music-screen') {
+                        setTimeout(() => {
+                            generateGallery();
+                        }, 300);
+                    }
+                }, 500);
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
+                        confetti.style.backgroundColor = getRandomColor();
+                        confetti.style.width = Math.random() * 10 + 5 + 'px';
+                        confetti.style.height = confetti.style.width;
+                        confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                        
+                        document.body.appendChild(confetti);
+                        
+                        setTimeout(() => {
+                            if (confetti.parentNode) {
+                                confetti.remove();
+                            }
+                        }, 5000);
+                    }, i * 50);
+                }
+            }
+            
+            function getRandomColor() {
+                const colors = ['#f8c8dc', '#f5c6d6', '#fce4ec', '#f8b4d0', '#e8a0bf'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // 1. Generate photo gallery with animations
+            function generateGallery() {
+                photoGallery.innerHTML = '';
+                photos.forEach((photo, index) => {
+                    const frame = document.createElement('div');
+                    frame.className = 'photo-frame';
+                    frame.dataset.index = index;
+                    
+                    const img = document.createElement('img');
+                    img.src = photo.url;
+                    img.alt = photo.label;
+                    img.loading = 'lazy';
+                    
+                    frame.appendChild(img);
+                    photoGallery.appendChild(frame);
+                    
+                    // Add animation when image loads
+                    img.onload = () => {
+                        setTimeout(() => {
+                            frame.classList.add('loaded');
+                        }, index * 100);
+                    };
+                    
+                    img.onerror = () => {
+                        frame.innerHTML = `
+                            <div style="
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: 100%;
+                                color: #888;
+                                padding: 20px;
+                                text-align: center;
+                                background: #f5f5f5;
+                                border-radius: 15px;
+                            ">
+                                <i class="fas fa-image" style="font-size: 2rem; margin-bottom: 10px;"></i><br>
+                                ${photo.label}
+                            </div>
+                        `;
+                        frame.classList.add('loaded');
+                    };
+                    
+                    // Add click event to open lightbox
+                    frame.addEventListener('click', () => openLightbox(index));
+                });
+                console.log("Gallery generated with " + photos.length + " photos");
+            }
+            
+            // 2. Lightbox functionality
+            function openLightbox(index) {
+                currentLightboxIndex = index;
+                updateLightbox();
+                lightboxModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                console.log("Opening lightbox for image " + (index + 1));
+            }
+            
+            function updateLightbox() {
+                const photo = photos[currentLightboxIndex];
+                lightboxImage.src = photo.url;
+                lightboxCaption.textContent = photo.label;
+                lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${photos.length}`;
+            }
+            
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // Reset image animation
+                lightboxImage.style.animation = 'none';
+                setTimeout(() => {
+                    lightboxImage.style.animation = 'lightboxImageZoom 0.4s ease forwards';
+                }, 10);
+            }
+            
+            function nextImage() {
+                currentLightboxIndex = (currentLightboxIndex + 1) % photos.length;
+                updateLightbox();
+            }
+            
+            function prevImage() {
+                currentLightboxIndex = (currentLightboxIndex - 1 + photos.length) % photos.length;
+                updateLightbox();
+            }
+            
+            // Setup lightbox event listeners
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', prevImage);
+            lightboxNext.addEventListener('click', nextImage);
+            
+            // Close lightbox when clicking outside image
+            lightboxModal.addEventListener('click', function(e) {
+                if (e.target === lightboxModal) {
+                    closeLightbox();
+                }
+            });
+            
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', function(e) {
+                if (!lightboxModal.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    prevImage();
+                }
+            });
+            
+            // Touch swipe for mobile
+            lightboxModal.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            lightboxModal.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next image
+                        nextImage();
+                    } else {
+                        // Swipe right - previous image
+                        prevImage();
+                    }
+                }
+            }
+            
+            // 3. Setup music player with YOUR SONG
+            function setupMusic() {
+                // Use only YOUR song URL
+                const yourSongUrl = "http://files.thenaatsharif.com/downloads/1762423214_MainAgarKahoon.mp3";
+                
+                // Initialize with your song URL
+                backgroundMusic.src = yourSongUrl;
+                backgroundMusic.volume = volumeSlider.value;
+                
+                // Update status function
+                function updateStatus(message, playing) {
+                    statusText.textContent = message;
+                    if (playing) {
+                        statusText.style.color = "#34A853";
+                        musicWave.classList.add('active');
+                        playBtn.classList.add('active');
+                    } else {
+                        statusText.style.color = "#4285F4";
+                        musicWave.classList.remove('active');
+                        playBtn.classList.remove('active');
+                    }
+                }
+                
+                // Play function
+                function playMusic() {
+                    // Show loading
+                    loadingSpinner.style.display = 'inline-block';
+                    musicWave.classList.remove('active');
+                    
+                    backgroundMusic.play().then(() => {
+                        isPlaying = true;
+                        updateStatus("Playing: Main Agar Kahoon 🎵", true);
+                        loadingSpinner.style.display = 'none';
+                        
+                        // Update instruction
+                        document.getElementById('drive-instruction').innerHTML = `
+                            <p><i class="fas fa-music" style="color: #34A853;"></i> <strong>Music Playing!</strong></p>
+                            <p>Your birthday song is now playing</p>
+                        `;
+                    }).catch(error => {
+                        console.error("Play error:", error);
+                        loadingSpinner.style.display = 'none';
+                        
+                        if (error.name === 'NotAllowedError') {
+                            updateStatus("Click play again to allow music", false);
+                            // Try again on next click
+                            playBtn.onclick = function() {
+                                backgroundMusic.play().catch(e => {
+                                    updateStatus("Please check browser permissions", false);
+                                });
+                            };
+                        } else {
+                            updateStatus("Music unavailable. Check internet.", false);
+                        }
+                    });
+                }
+                
+                // Play button
+                playBtn.addEventListener('click', playMusic);
+                
+                // Pause button
+                pauseBtn.addEventListener('click', function() {
+                    backgroundMusic.pause();
+                    isPlaying = false;
+                    updateStatus("Music paused", false);
+                });
+                
+                // Stop button
+                stopBtn.addEventListener('click', function() {
+                    backgroundMusic.pause();
+                    backgroundMusic.currentTime = 0;
+                    isPlaying = false;
+                    updateStatus("Click play to start music", false);
+                });
+                
+                // Mute button
+                muteBtn.addEventListener('click', function() {
+                    isMuted = !isMuted;
+                    backgroundMusic.muted = isMuted;
+                    
+                    if (isMuted) {
+                        muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        lastVolume = volumeSlider.value;
+                        volumeSlider.value = 0;
+                    } else {
+                        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        volumeSlider.value = lastVolume;
+                        backgroundMusic.volume = lastVolume;
+                    }
+                });
+                
+                // Volume slider
+                volumeSlider.addEventListener('input', function() {
+                    backgroundMusic.volume = this.value;
+                    if (this.value > 0 && isMuted) {
+                        isMuted = false;
+                        backgroundMusic.muted = false;
+                        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    }
+                    lastVolume = this.value;
+                });
+                
+                // Music events
+                backgroundMusic.addEventListener('playing', () => {
+                    isPlaying = true;
+                    updateStatus("Playing birthday music 🎵", true);
+                });
+                
+                backgroundMusic.addEventListener('pause', () => {
+                    isPlaying = false;
+                    updateStatus("Music paused", false);
+                });
+                
+                backgroundMusic.addEventListener('ended', () => {
+                    isPlaying = false;
+                    updateStatus("Music ended. Click play to replay", false);
+                    // Auto-restart (since loop is enabled)
+                    setTimeout(() => {
+                        if (!isPlaying) {
+                            backgroundMusic.currentTime = 0;
+                            backgroundMusic.play();
+                        }
+                    }, 1000);
+                });
+                
+                backgroundMusic.addEventListener('error', (e) => {
+                    console.error("Audio error:", e);
+                    updateStatus("Music unavailable. Check URL or internet.", false);
+                });
+                
+                console.log("Music player ready with your song!");
+            }
+            
+            // 4. Navigation
+            ribbon.addEventListener('click', function() {
+                switchScreen(openingScreen, titleScreen);
+                console.log("Ribbon clicked, moving to title screen");
+            });
+            
+            viewPhotosBtn.addEventListener('click', function() {
+                switchScreen(titleScreen, photoMusicScreen);
+                console.log("Moving to photo/music screen");
+            });
+            
+            titleBackBtn.addEventListener('click', function() {
+                switchScreen(titleScreen, openingScreen);
+                console.log("Back to opening screen");
+            });
+            
+            photoBackBtn.addEventListener('click', function() {
+                switchScreen(photoMusicScreen, titleScreen);
+                console.log("Back to title screen");
+            });
+            
+            // 5. Initialize everything
+            setupMusic();
+            
+            console.log("Website initialized successfully!");
+            console.log("🎉 Click the ribbon to start the celebration!");
+            console.log("📸 Click on any photo to view it in full screen!");
+            console.log("🎵 Your song URL is loaded: Main Agar Kahoon");
+        });
+    </script>
+</body>
+</html>
